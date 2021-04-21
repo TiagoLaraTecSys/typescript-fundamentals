@@ -6,22 +6,13 @@ System.register([], function (exports_1, context_1) {
         setters: [],
         execute: function () {
             Negociacao = class Negociacao {
-                constructor(__date, __quantidade, __valor) {
-                    this.__date = __date;
-                    this.__quantidade = __quantidade;
-                    this.__valor = __valor;
-                }
-                get date() {
-                    return this.__date;
-                }
-                get quantidade() {
-                    return this.__quantidade;
-                }
-                get valor() {
-                    return this.__valor;
+                constructor(date, quantidade, valor) {
+                    this.date = date;
+                    this.quantidade = quantidade;
+                    this.valor = valor;
                 }
                 get volume() {
-                    return this.__quantidade * this.__valor;
+                    return this.quantidade * this.valor;
                 }
             };
             exports_1("Negociacao", Negociacao);
