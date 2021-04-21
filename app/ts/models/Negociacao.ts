@@ -1,4 +1,4 @@
-class Negociacao {
+export class Negociacao {
     
     constructor(private __date: Date, private __quantidade:number,private __valor: number){
     }
