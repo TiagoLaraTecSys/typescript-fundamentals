@@ -25,6 +25,8 @@ export class NegociacaoController {
     }
     adiciona(event: Event){
         
+        const t1 = performance.now();
+
         event.preventDefault();
 
         let data = new Date(this._inputData.val().replace(/-/g,'/'));
@@ -44,7 +46,10 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoes);
         this._mensagemView.update('Negociação adicionada!');
         // TEste para ver se da para deletar do paraArray
+        
+        const t2 = performance.now();
 
+        console.log(`O tempo de execução de adiciona é de ${t2 - t1} ms`)
         
     }
 }

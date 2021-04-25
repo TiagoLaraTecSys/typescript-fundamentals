@@ -27,6 +27,7 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
                         date.getDay() == diaDeSemana.Sábado;
                 }
                 adiciona(event) {
+                    const t1 = performance.now();
                     event.preventDefault();
                     let data = new Date(this._inputData.val().replace(/-/g, '/'));
                     // Verificando se a data selecionada é dia útil
@@ -39,6 +40,8 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
                     this._negociacoesView.update(this._negociacoes);
                     this._mensagemView.update('Negociação adicionada!');
                     // TEste para ver se da para deletar do paraArray
+                    const t2 = performance.now();
+                    console.log(`O tempo de execução de adiciona é de ${t2 - t1} ms`);
                 }
             };
             exports_1("NegociacaoController", NegociacaoController);
