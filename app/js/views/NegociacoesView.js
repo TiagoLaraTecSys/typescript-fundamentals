@@ -35,7 +35,7 @@ System.register(["./View"], function (exports_1, context_1) {
 
                     </tfoot>
                 </table>
-                <script>alert("opa")</script>
+                
             `;
                 }
             };

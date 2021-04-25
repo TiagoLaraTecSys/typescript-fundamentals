@@ -12,6 +12,6 @@ export class Negociacoes {
 
     paraArray(): Array<Negociacao> {
         // Gerando uma cópia da o array original da classe
-        return [].concat(this._negociacoes);
+        return ([] as Negociacao[]).concat(this._negociacoes);
     }
 }
