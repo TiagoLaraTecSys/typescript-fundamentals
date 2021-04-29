@@ -1,6 +1,8 @@
 import { NegociacoesView, MensagemView, typInfo } from '../views/index';
 
 import { Negociacoes, Negociacao } from '../models/index';
+import { logarTempoDeExecução } from '../helpers/decorators/index';
+
 
 export class NegociacaoController {
 
@@ -23,9 +25,9 @@ export class NegociacaoController {
         return date.getDay() == diaDeSemana.Domingo || 
         date.getDay() == diaDeSemana.Sábado;
     }
+    @logarTempoDeExecução()
     adiciona(event: Event){
-        
-        const t1 = performance.now();
+
 
         event.preventDefault();
 
@@ -46,11 +48,7 @@ export class NegociacaoController {
         this._negociacoesView.update(this._negociacoes);
         this._mensagemView.update('Negociação adicionada!');
         // TEste para ver se da para deletar do paraArray
-        
-        const t2 = performance.now();
-
-        console.log(`O tempo de execução de adiciona é de ${t2 - t1} ms`)
-        
+               
     }
 }
 enum diaDeSemana {

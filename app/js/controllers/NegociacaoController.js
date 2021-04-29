@@ -1,7 +1,13 @@
-System.register(["../views/index", "../models/index"], function (exports_1, context_1) {
+System.register(["../views/index", "../models/index", "../helpers/decorators/index"], function (exports_1, context_1) {
     "use strict";
+    var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+        var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+        else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+    };
     var __moduleName = context_1 && context_1.id;
-    var index_1, index_2, NegociacaoController, diaDeSemana;
+    var index_1, index_2, index_3, NegociacaoController, diaDeSemana;
     return {
         setters: [
             function (index_1_1) {
@@ -9,6 +15,9 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
             },
             function (index_2_1) {
                 index_2 = index_2_1;
+            },
+            function (index_3_1) {
+                index_3 = index_3_1;
             }
         ],
         execute: function () {
@@ -27,7 +36,6 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
                         date.getDay() == diaDeSemana.Sábado;
                 }
                 adiciona(event) {
-                    const t1 = performance.now();
                     event.preventDefault();
                     let data = new Date(this._inputData.val().replace(/-/g, '/'));
                     // Verificando se a data selecionada é dia útil
@@ -40,10 +48,11 @@ System.register(["../views/index", "../models/index"], function (exports_1, cont
                     this._negociacoesView.update(this._negociacoes);
                     this._mensagemView.update('Negociação adicionada!');
                     // TEste para ver se da para deletar do paraArray
-                    const t2 = performance.now();
-                    console.log(`O tempo de execução de adiciona é de ${t2 - t1} ms`);
                 }
             };
+            __decorate([
+                index_3.logarTempoDeExecução()
+            ], NegociacaoController.prototype, "adiciona", null);
             exports_1("NegociacaoController", NegociacaoController);
             (function (diaDeSemana) {
                 diaDeSemana[diaDeSemana["Domingo"] = 0] = "Domingo";
