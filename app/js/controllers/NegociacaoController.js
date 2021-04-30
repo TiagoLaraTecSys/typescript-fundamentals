@@ -35,6 +35,24 @@ System.register(["../views/index", "../models/index", "../helpers/decorators/ind
                     return date.getDay() == diaDeSemana.Domingo ||
                         date.getDay() == diaDeSemana.Sábado;
                 }
+                importaDados() {
+                    function isOk(res) {
+                        if (res.ok) {
+                            return res;
+                        }
+                        else {
+                            throw new Error(res.statusText);
+                        }
+                    }
+                    fetch('http://localhost:8080/dados')
+                        .then(response => isOk(response))
+                        .then(res => res.json())
+                        .then((dados) => {
+                        dados.map(dado => new index_2.Negociacao(new Date(), dado.vezes, dado.montante)).forEach(Negociacao => this._negociacoes.adiciona(Negociacao));
+                        this._negociacoesView.update(this._negociacoes);
+                    })
+                        .catch(err => console.log(err.message));
+                }
                 adiciona(event) {
                     event.preventDefault();
                     let data = new Date(this._inputData.val().replace(/-/g, '/'));

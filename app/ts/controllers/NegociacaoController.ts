@@ -29,6 +29,26 @@ export class NegociacaoController {
         date.getDay() == diaDeSemana.Sábado;
     }
     
+    importaDados(){
+        function isOk(res: any ){
+            if (res.ok){
+                return res;
+            } else {
+                throw new Error(res.statusText);
+            }
+            
+        }
+        fetch('http://localhost:8080/dados')
+        .then(response => isOk(response))
+        .then(res => res.json())
+        .then((dados: any[]) =>  {
+            dados.map(dado => new Negociacao(new Date(), dado.vezes, dado.montante)).forEach(Negociacao => this._negociacoes.adiciona(Negociacao));
+            this._negociacoesView.update(this._negociacoes);
+        }
+        )
+        .catch(err => console.log(err.message))
+    }
+
     adiciona(event: Event){
 
 
