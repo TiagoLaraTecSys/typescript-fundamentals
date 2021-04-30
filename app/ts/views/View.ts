@@ -9,7 +9,7 @@ import { logarTempoDeExecução } from "../helpers/decorators/index";
             this._escapar = escapar;
         }
 
-        @logarTempoDeExecução()
+       
         update(model: T,someEnum?: k) {
             
             let template = this.template(model)
