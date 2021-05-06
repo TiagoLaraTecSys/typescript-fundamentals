@@ -15,6 +15,7 @@
   "devDependencies": {
     "@types/jquery": "^2.0.56",
     "@types/lodash": "^4.14.168",
+    "concurrently": "^6.0.2",
     "lite-server": "^2.3.0",
     "typescript": "^2.3.2"
   }
