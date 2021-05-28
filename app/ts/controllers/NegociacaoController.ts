@@ -7,13 +7,13 @@ import {
   throttle,
 } from "../helpers/decorators/index";
 import { NegociacaoService, HandlerFunction } from "../services/index";
-
+import { imprime } from "../helpers/index";
 export class NegociacaoController {
   @domInject("#data")
   private _inputData: JQuery;
   @domInject("#quantidade")
   private _inputQuantidade: JQuery;
-  @domInject("valor")
+  @domInject("#valor")
   private _inputValor: JQuery;
   private _negociacoes = new Negociacoes();
   private _negociacoesView = new NegociacoesView("#negociacoesView", true);
@@ -60,6 +60,7 @@ export class NegociacaoController {
       this._mensagemView.update("Negociações só são possíveis em dias úteis");
       return;
     }
+    console.log(this._inputValor.val());
     const negociacao = new Negociacao(
       data,
       parseInt(this._inputQuantidade.val()),
@@ -67,6 +68,9 @@ export class NegociacaoController {
     );
 
     this._negociacoes.adiciona(negociacao);
+
+    imprime(negociacao, this._negociacoes);
+
     this._negociacoesView.update(this._negociacoes);
     this._mensagemView.update("Negociação adicionada!");
     // TEste para ver se da para deletar do paraArray
