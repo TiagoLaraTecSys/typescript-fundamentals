@@ -1,6 +1,6 @@
-import { Imprimivel } from "./Imprimivel";
+import { MeuObjeto } from "./MeuObjeto";
 
-export class Negociacao implements Imprimivel {
+export class Negociacao implements MeuObjeto<Negociacao> {
   constructor(
     readonly date: Date,
     readonly quantidade: number,
@@ -16,5 +16,12 @@ export class Negociacao implements Imprimivel {
                      quantidade: ${this.quantidade},
                      valor: ${this.valor},
                      volume: ${this.volume}`);
+  }
+  ehIgual(negociacao: Negociacao): boolean {
+    return (
+      this.date.getDate() == negociacao.date.getDate() &&
+      this.quantidade == negociacao.quantidade &&
+      this.valor == negociacao.valor
+    );
   }
 }

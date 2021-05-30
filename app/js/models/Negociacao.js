@@ -20,6 +20,11 @@ System.register([], function (exports_1, context_1) {
                      valor: ${this.valor},
                      volume: ${this.volume}`);
                 }
+                ehIgual(negociacao) {
+                    return (this.date.getDate() == negociacao.date.getDate() &&
+                        this.quantidade == negociacao.quantidade &&
+                        this.valor == negociacao.valor);
+                }
             };
             exports_1("Negociacao", Negociacao);
         }
