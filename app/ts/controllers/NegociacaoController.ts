@@ -34,34 +34,38 @@ export class NegociacaoController {
   }
 
   @throttle(500)
-  importaDados() {
-    this._service
-      .obterNegociacoes((res) => {
-        if (res.ok) {
-          return res;
-        } else {
-          throw new Error(res.statusText);
-        }
-      })
-      .then((negociacoesParaImportar) => {
-        const negociacoesJaImportadas = this._negociacoes.paraArray();
+  async importaDados() {
+      try{
+          const negociacoesParaImportar = await this._service
+              .obterNegociacoes((res) => {
+                  if (res.ok) {
+                      return res;
+                  } else {
+                      throw new Error(res.statusText);
+                  }
+              });
 
-        negociacoesParaImportar
-          .filter(
-            (negociacao: Negociacao) =>
-              !negociacoesJaImportadas.some((jaImportada) =>
-                negociacao.ehIgual(jaImportada)
+          const negociacoesJaImportadas = this._negociacoes.paraArray();
+
+          negociacoesParaImportar
+              .filter(
+                  (negociacao: Negociacao) =>
+                      !negociacoesJaImportadas.some((jaImportada) =>
+                          negociacao.ehIgual(jaImportada)
+                      )
               )
-          )
-          .forEach((negociacao: Negociacao) =>
-            this._negociacoes.adiciona(negociacao)
-          );
+              .forEach((negociacao: Negociacao) =>
+                  this._negociacoes.adiciona(negociacao)
+              );
 
-        this._negociacoesView.update(this._negociacoes);
-      });
-  }
+          this._negociacoesView.update(this._negociacoes);
+      } catch(err){
+          this._mensagemView.update(err.message)
+      }
+
+      }
   @throttle(500)
-  adiciona() {
+adiciona() {
     let data = new Date(this._inputData.val().replace(/-/g, "/"));
 
     // Verificando se a data selecionada é dia útil
